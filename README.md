@@ -1,8 +1,7 @@
 # Analytic Widgets #
 
-TODO Describe the plugin shortly here.
+Analytics widget block with beautiful charts and stats for users
 
-TODO Provide more detailed description here.
 
 ## License ##
 
