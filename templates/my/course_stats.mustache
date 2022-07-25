@@ -1,0 +1,177 @@
+
+
+
+<div class="aw_widget_header">
+
+
+
+</div>
+<div class="aw_stats col-md-8  mb-4">
+    <div class="aw_widget_header">
+        <h5> <a href="{{config.wwwroot}}/my/courses.php" title="{{#str}}mycourses{{/str}}" data-toggle="tooltip">{{#str}}my_so_far, block_analyticswidget{{/str}}</a></h5>
+        <div class="tools">
+           {{{links}}}
+        </div>
+    </div>
+    <div class="row mx-0 aw-shadow-box ">
+
+
+        <div class="col-md-6 ">
+            {{^chart_enrolment}}
+            <div  class="aw_chart text-justify">
+                {{#str}} my_no_course,block_analyticswidget{{/str}}
+            </div>
+            {{/chart_enrolment}}
+            {{#chart_enrolment}}
+            <canvas id="enrolment_course_stats" class="aw_chart">
+
+            </canvas>
+            {{/chart_enrolment}}
+        </div>
+
+
+        {{#enrolasstudent}}
+        <div class="col-md-6 ">
+            {{^chart_completion}}
+            <div  class="aw_chart text-justify">
+
+            </div>
+            {{/chart_completion}}
+            {{#chart_completion}}
+            <canvas id="completion_course_stats" class="aw_chart">
+
+            </canvas>
+            {{/chart_completion}}
+        </div>
+        {{/enrolasstudent}}
+
+    </div>
+</div>
+{{#enrolasstudent}}
+<div class="col-md-4 ">
+    <div class="aw_widget_header">
+        <h5> {{#str}}my_current, block_analyticswidget{{/str}}</h5>
+    </div>
+    <div class="aw-widget aw-shadow-box ">
+        <div>
+            <div class="aw-widget-subtitle">As student</div>
+
+            <div class="aw-widget-title">{{enrolasstudent}}</div>
+        </div>
+        <div class="aw-widget-icon bg-green">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+        </div>
+
+    </div>
+
+</div>
+
+{{/enrolasstudent}}
+
+
+{{#chart_enrolment}}
+{{#js}}
+require([
+'jquery',
+'core/chartjs'
+], function($, Chart) {
+
+var chart_div = $("#enrolment_course_stats");
+
+var chartdata = {
+labels:{{{chart_enrolment.label}}},
+datasets: [{
+data: {{{chart_enrolment.dataset}}},
+backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
+borderWidth: 2
+}]
+}
+
+var config = {
+type: 'pie',
+data: chartdata,
+options: {
+responsive: true,
+maintainAspectRatio: false,
+aspectRatio: 1,
+legend: {
+
+position: 'left',
+labels:{
+generateLabels: function(chart) {
+var data = chart.data;
+if (data.labels.length && data.datasets.length) {
+return data.labels.map(function(label, i) {
+var meta = chart.getDatasetMeta(0);
+var ds = data.datasets[0];
+var arc = meta.data[i];
+var custom = arc && arc.custom || {};
+var valueAtIndexOrDefault = Chart.helpers.valueAtIndexOrDefault;
+var arcOpts = chart.options.elements.arc;
+var fill = custom.backgroundColor ? custom.backgroundColor : valueAtIndexOrDefault(ds.backgroundColor, i, arcOpts.backgroundColor);
+var stroke = custom.borderColor ? custom.borderColor : valueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
+var bw = custom.borderWidth ? custom.borderWidth : valueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
+var value = chart.config.data.datasets[arc._datasetIndex].data[arc._index];
+return {
+text: label + " : " + value,
+fillStyle: fill,
+strokeStyle: stroke,
+lineWidth: bw,
+hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
+
+index: i
+};
+});
+}else{
+return [];
+}
+},
+usePointStyle: true,
+}
+},
+}
+};
+
+chart = new Chart(chart_div, config);
+
+});
+
+{{/js}}
+{{/chart_enrolment}}
+
+{{#chart_completion}}
+{{#js}}
+require([
+'jquery',
+'core/chartjs'
+], function($, Chart) {
+
+var chart_div = $("#completion_course_stats");
+
+var chartdata = {
+labels:{{{chart_completion.label}}},
+datasets: [{
+data: {{{chart_completion.dataset}}},
+backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
+borderWidth: 2,
+indexAxis: 'y',
+}]
+}
+
+var config = {
+type: 'bar',
+data: chartdata,
+options: {
+responsive: true,
+maintainAspectRatio: false,
+aspectRatio: 1,
+legend:{
+display:false
+}
+}};
+chart = new Chart(chart_div, config);
+
+});
+
+{{/js}}
+{{/chart_completion}}
