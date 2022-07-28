@@ -1,7 +1,30 @@
-<!--
- Analytics widget
+{{!
+    This file is part of Moodle - http://moodle.org/
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_analyticswidget/widget.mustache
 
--->
+    Example context (json):
+    {
+        "teacher":{
+            "html":""
+        },
+        "my":{
+            "html":""
+        }
+    }
+}}
+
 <div class="ananyticswidget">
     {{#admin}}
     <div class="aw_admin">
@@ -55,136 +78,3 @@
     </div>
     {{/my}}
 </div>
-
-<style>
-    .aw_chart{
-        height:80px!important;
-    }
-    .aw_header, .aw_widget_header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .aw_header h4, .aw_widget_header h5 { margin-bottom: 0; color: var(--aw-black-60); }
-    .aw_header .tools a {
-        margin-left: 5px;
-        display: inline-block;
-        height: 28px;
-        width: 28px;
-        color: white;
-        text-align: center;
-        border-radius:8px;
-        vertical-align: middle;
-    }
-    .aw_header .tools a:focus {
-        color: white;
-    }
-    .aw_header .tools a i {
-        margin-right: 0;
-        line-height: 28px;
-    }
-    .aw_header .tools a i.icon {
-        margin-top: -4px;
-    }
-    .aw_header .tools a img {
-        height: 28px;
-        margin-right: 0;
-        filter: brightness(0) invert(1);
-    }
-    .aw_widget_header { margin-bottom: .5rem; }
-    .aw_widget_header .tools a {
-        margin-left: 5px;
-        display: inline-block;
-        height: 24px;
-        width: 32px;
-        line-height: 24px;
-        text-align: center;
-        border-radius:8px;
-    }
-    .aw_widget_header .tools a img {
-        height: 24px;
-        margin-right: 0;
-    }
-
-    .aw_widget_header .tools a:focus {
-        color: white;
-    }
-
-
-    .aw_btn_more {
-        position: absolute;
-        right: 2rem;
-        bottom: 1rem;
-        font-size: 10px;
-        height: 20px;
-        line-height: 20px;
-        padding: 0 10px;
-        text-align: center;
-        border-radius: 12px;
-        cursor: pointer;
-    }
-    .aw_btn_more span {
-        font-size: 0;
-        transition: all .1s ease-in;
-    }
-    .aw_btn_more:hover {
-    }
-    .aw_btn_more:hover span {
-        margin-left: 4px;
-        font-size: 10px;
-    }
-    /* Custom scrollbar ends *//* Custom boxes starts */
-.aw-shadow-box {
-    box-shadow: rgba(0,0,0,.05) 0 1px 0,rgba(0,0,0,.05) 0 2px 6px,rgba(0,0,0,.05) 0 0px 20px;;
-    border-radius: 8px;
-    padding: 1rem;
-}
-/* Custom boxes ends */
-/* Custom widget starts */
-.aw-widget {
-    box-shadow:rgba(0,0,0,.05) 0 1px 0,rgba(0,0,0,.05) 0 2px 6px,rgba(0,0,0,.05) 0 0px 20px;;
-    padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-radius:8px);
-
-}
-.aw-widget-subtitle {
-    font-size: small;
-    transition: all .3s ease-in;
-    line-height: 1;
-    padding-bottom: 8px;
-}
-.aw-widget-title {
-    color: var(--aw-text-darker);
-    transition: all .3s ease-in;
-    font-size: 1rem;
-    line-height: 1;
-}
-.aw-widget:hover .aw-widget-subtitle {
-    font-size: .65rem;
-    line-height: 1;
-    padding-bottom: 2px;
-}
-.aw-widget:hover .aw-widget-title {
-    font-size: xx-large;
-    line-height: 1;
-}
-.aw-widget-icon {
-    border-radius:8px;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    color: #fff;
-    background: #0f6cbf;
-}
-.aw-widget-icon i {
-    line-height: 60px;
-}
-.aw-widget-wrap a {
-    text-decoration: none;
-}
-
-</style>

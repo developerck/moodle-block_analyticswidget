@@ -50,7 +50,7 @@ class widget implements renderable, templatable {
 
     private function get_teacher_widget() {
 
-        global $DB, $USER, $CFG, $OUTPUT, $SESSION;
+        global $DB;
         $html = [];
         // Check if teacher at some course.
         $teacherrole = $DB->get_field("role", "id", array("shortname" => "editingteacher"));
@@ -119,8 +119,6 @@ class widget implements renderable, templatable {
     }
     private function get_my_widget() {
 
-        global $DB, $USER, $CFG, $OUTPUT, $SESSION;
-
         $html = [];
         $courses = enrol_get_users_courses($this->_userid);
         $activecourses = enrol_get_users_courses($this->_userid, true);
@@ -150,12 +148,10 @@ class widget implements renderable, templatable {
 
         $links = implode(" ", $links);
         return array("html" => implode("", $html), "userid" => $this->_userid, "links" => $links);
-        return array("html" => implode("", $html), "userid" => $this->_userid);
     }
 
     public function export_for_template($renderer) {
-        $reutn = [];
-
+        $return = [];
         if (get_config('block_analyticswidget', 'aw_teacher_level') && $html = $this->get_teacher_widget()) {
             $return["teacher"] = $html;
         }

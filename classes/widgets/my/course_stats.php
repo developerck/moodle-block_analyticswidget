@@ -44,7 +44,7 @@ class course_stats implements \block_analyticswidget\widgetfacade {
         }
     }
     public function export_html() {
-        global $OUTPUT, $DB;
+        global $OUTPUT;
         $context  = array();
         $context['enrolment'] = $this->enrolment();
         if (!empty($this->courses)) {
@@ -56,8 +56,6 @@ class course_stats implements \block_analyticswidget\widgetfacade {
         }
 
         $context['enrolasstudent'] = count($this->studing_in);
-
-        $links = [];
         return $OUTPUT->render_from_template('block_analyticswidget/my/course_stats', $context);
     }
 
@@ -77,8 +75,8 @@ class course_stats implements \block_analyticswidget\widgetfacade {
         $progress = [];
         foreach ($this->active_courses as $course) {
             $cinfo = new \completion_info($course);
-            if ($coursecompletiontimestamp = $cinfo->is_course_complete($this->userid)) {
-                $completed[$course->id] = $coursecompletiontimestamp;
+            if ($cctimestamp = $cinfo->is_course_complete($this->userid)) {
+                $completed[$course->id] = $cctimestamp;
             } else {
                 $progress[$course->id] = \core_completion\progress::get_course_progress_percentage($course, $this->userid);
             }

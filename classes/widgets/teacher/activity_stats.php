@@ -35,7 +35,7 @@ class activity_stats implements \block_analyticswidget\widgetfacade {
     }
 
     public function export_html() {
-        global $OUTPUT, $DB;
+        global $OUTPUT;
         if (get_config('block_analyticswidget', 'aw_teacher_stats_activity')) {
             $context  = array();
             // Get only visible and course.

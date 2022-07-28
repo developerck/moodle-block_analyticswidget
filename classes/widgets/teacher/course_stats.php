@@ -35,7 +35,7 @@ class course_stats implements \block_analyticswidget\widgetfacade {
     }
 
     public function export_html() {
-        global $OUTPUT, $DB;
+        global $OUTPUT;
         if (get_config('block_analyticswidget', 'aw_teacher_stats_course')) {
             $context  = array();
             // Get only visible and course.
