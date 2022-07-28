@@ -47,12 +47,8 @@ class widget implements renderable, templatable {
     }
 
 
-
-    private function get_teacher_widget() {
-
+    private function get_teacher_courses() {
         global $DB;
-        $html = [];
-        // Check if teacher at some course.
         $teacherrole = $DB->get_field("role", "id", array("shortname" => "editingteacher"));
         if (!$teacherrole) {
             return null;
@@ -70,7 +66,15 @@ class widget implements renderable, templatable {
                 }
             }
         }
+        return $teachercourse;
+    }
 
+    private function get_teacher_widget() {
+
+        global $DB;
+        $html = [];
+        // Check if teacher at some course.
+        $teachercourse = $this->get_teacher_courses();
         if (empty($teachercourse)) {
             return null;
         }
