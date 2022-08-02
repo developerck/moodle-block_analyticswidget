@@ -96,11 +96,10 @@ class course_stats implements \block_analyticswidget\widgetfacade {
     }
 
     /**
-     * Returns the array.
+     * showing the data for the enrolment of my widget
      *
      * @return  array  data | label.
      */
-
     private function enrolment() {
         return array(
             'data' => array(count($this->active_courses), (count($this->courses) - count($this->active_courses))),

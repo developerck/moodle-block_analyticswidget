@@ -46,6 +46,7 @@ class widget implements renderable, templatable {
 
     /**
      * Intializing
+     * @param int $userid | optional
      */
     public function __construct($userid = 0) {
         global $USER;
