@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_analyticswidget';
 $plugin->release = '0.1.0';
-$plugin->version = 2022062102;
+$plugin->version = 2022062103;
 $plugin->requires = 2020061500;
 $plugin->maturity = MATURITY_ALPHA;
