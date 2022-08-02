@@ -123,68 +123,80 @@
 {{#chart_enrolment}}
 {{#js}}
 require([
-'jquery',
-'core/chartjs'
+    'jquery',
+    'core/chartjs'
 ], function($, Chart) {
 
-var chart_div = $("#enrolment_course_stats");
+    var chartDiv = $("#enrolment_course_stats");
 
-var chartdata = {
-labels:{{{chart_enrolment.label}}},
-datasets: [{
-data: {{{chart_enrolment.dataset}}},
-backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
-borderWidth: 2
-}]
-}
+    var chartdata = {
+        labels: {
+            {
+                {
+                    chart_enrolment.label
+                }
+            }
+        },
+        datasets: [{
+            data: {
+                {
+                    {
+                        chart_enrolment.dataset
+                    }
+                }
+            },
+            backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
+            borderWidth: 2
+        }]
+    }
 
-var config = {
-type: 'pie',
-data: chartdata,
-options: {
-responsive: true,
-maintainAspectRatio: false,
-aspectRatio: 1,
-legend: {
+    var config = {
+        type: 'pie',
+        data: chartdata,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: 1,
+            legend: {
 
-position: 'left',
-labels:{
-generateLabels: function(chart) {
-var data = chart.data;
-if (data.labels.length && data.datasets.length) {
-return data.labels.map(function(label, i) {
-var meta = chart.getDatasetMeta(0);
-var ds = data.datasets[0];
-var arc = meta.data[i];
-var custom = arc && arc.custom || {};
-var valueAtIndexOrDefault = Chart.helpers.valueAtIndexOrDefault;
-var arcOpts = chart.options.elements.arc;
-var fill = custom.backgroundColor ? custom.backgroundColor : valueAtIndexOrDefault(ds.backgroundColor, i,
-arcOpts.backgroundColor);
-var stroke = custom.borderColor ? custom.borderColor : valueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
-var bw = custom.borderWidth ? custom.borderWidth : valueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
-var value = chart.config.data.datasets[arc._datasetIndex].data[arc._index];
-return {
-text: label + " : " + value,
-fillStyle: fill,
-strokeStyle: stroke,
-lineWidth: bw,
-hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
+                position: 'left',
+                labels: {
+                    generateLabels: function(chart) {
+                        var data = chart.data;
+                        if (data.labels.length && data.datasets.length) {
+                            return data.labels.map(function(label, i) {
+                                var meta = chart.getDatasetMeta(0);
+                                var ds = data.datasets[0];
+                                var arc = meta.data[i];
+                                var custom = arc && arc.custom || {};
+                                var valueAtIndexOrDefault = Chart.helpers.valueAtIndexOrDefault;
+                                var arcOpts = chart.options.elements.arc;
+                                var fill = custom.backgroundColor ? custom.backgroundColor : valueAtIndexOrDefault(ds.backgroundColor, i,
+                                    arcOpts.backgroundColor);
+                                var stroke = custom.borderColor ? custom.borderColor : valueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
+                                var bw = custom.borderWidth ? custom.borderWidth : valueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
+                                var value = chart.config.data.datasets[arc._datasetIndex].data[arc._index];
+                                return {
+                                    text: label + " : " + value,
+                                    fillStyle: fill,
+                                    strokeStyle: stroke,
+                                    lineWidth: bw,
+                                    hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
 
-index: i
-};
-});
-}else{
-return [];
-}
-},
-usePointStyle: true,
-}
-},
-}
-};
+                                    index: i
+                                };
+                            });
+                        } else {
+                            return [];
+                        }
+                    },
+                    usePointStyle: true,
+                }
+            },
+        }
+    };
 
-chart = new Chart(chart_div, config);
+    chart = new Chart(chartDiv, config);
 
 });
 
@@ -194,34 +206,47 @@ chart = new Chart(chart_div, config);
 {{#chart_completion}}
 {{#js}}
 require([
-'jquery',
-'core/chartjs'
+    'jquery',
+    'core/chartjs'
 ], function($, Chart) {
 
-var chart_div = $("#completion_course_stats");
+    var chartDiv = $("#completion_course_stats");
 
-var chartdata = {
-labels:{{{chart_completion.label}}},
-datasets: [{
-data: {{{chart_completion.dataset}}},
-backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
-borderWidth: 2,
-indexAxis: 'y',
-}]
-}
+    var chartdata = {
+        labels: {
+            {
+                {
+                    chart_completion.label
+                }
+            }
+        },
+        datasets: [{
+            data: {
+                {
+                    {
+                        chart_completion.dataset
+                    }
+                }
+            },
+            backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
+            borderWidth: 2,
+            indexAxis: 'y',
+        }]
+    }
 
-var config = {
-type: 'bar',
-data: chartdata,
-options: {
-responsive: true,
-maintainAspectRatio: false,
-aspectRatio: 1,
-legend:{
-display:false
-}
-}};
-chart = new Chart(chart_div, config);
+    var config = {
+        type: 'bar',
+        data: chartdata,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: 1,
+            legend: {
+                display: false
+            }
+        }
+    };
+    chart = new Chart(chartDiv, config);
 
 });
 
