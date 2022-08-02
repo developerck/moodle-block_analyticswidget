@@ -32,14 +32,17 @@ class user_stats implements \block_analyticswidget\widgetfacade {
 
     /**
      * courses
+     * @var array $courses
      */
     public $courses = [];
     /**
      * order of display
+     * @var int $order
      */
     public $order = 2;
     /**
      * Intializing
+     * @param array $courses
      */
     public function __construct($courses) {
         $this->courses = $courses;

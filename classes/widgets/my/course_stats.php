@@ -32,27 +32,36 @@ class course_stats implements \block_analyticswidget\widgetfacade {
 
     /**
      *  courses
+     * @var array $courses
      */
     public $courses = [];
     /**
      * userid
+     * @var int $userid
      */
     public $userid;
     /**
      * order
+     * @var int $order
      */
     public $order = 1;
     /**
      * active courses
+     * @var array $activecourses
      */
     public $activecourses = [];
     /**
      * stuyding in
+     * @var array $studingin
      */
     public $studingin  = [];
 
      /**
       * Initializes class member variables.
+      * @param int $userid
+      * @param array $courses
+      * @param array $activecourses
+      * @param array $studingin
       */
     public function __construct($userid, $courses, $activecourses, $studingin) {
         $this->courses = $courses;

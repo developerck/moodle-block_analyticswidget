@@ -32,11 +32,21 @@ use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Main Widget class
+ *
+ */
 class widget implements renderable, templatable {
 
-
+    /**
+     * user id
+     * @var int $_userid
+     */
     private $_userid;
 
+    /**
+     * Intializing
+     */
     public function __construct($userid = 0) {
         global $USER;
         if (!$userid) {
@@ -46,7 +56,10 @@ class widget implements renderable, templatable {
         $this->_userid = $userid;
     }
 
-
+    /**
+     * Teacher Courses
+     * @return array $teachercourse
+     */
     private function get_teacher_courses() {
         global $DB;
         $teacherrole = get_config('block_analyticswidget', 'teacher_roleid');
@@ -70,6 +83,10 @@ class widget implements renderable, templatable {
         return $teachercourse;
     }
 
+    /**
+     * Teacher Widget
+     * @return array  html
+     */
     private function get_teacher_widget() {
 
         global $DB;
@@ -106,7 +123,11 @@ class widget implements renderable, templatable {
         return array("html" => implode("", $html), "links" => $links);
     }
 
-
+    /**
+     * Studying in
+     * @param array $activecourses
+     * @return array $studentcourses
+     */
     private function studying_in($activecourses) {
         global $DB;
         $studentrole = get_config('block_analyticswidget', 'student_roleid');
@@ -122,6 +143,11 @@ class widget implements renderable, templatable {
         }
         return $studentcourses;
     }
+
+    /**
+     * my widget
+     * @return array  array of html and links
+     */
     private function get_my_widget() {
 
         $html = [];
@@ -155,6 +181,11 @@ class widget implements renderable, templatable {
         return array("html" => implode("", $html), "userid" => $this->_userid, "links" => $links);
     }
 
+    /**
+     * Export for template
+     * @param main $renderer
+     * @return array $return
+     */
     public function export_for_template($renderer) {
         $return = [];
         if (get_config('block_analyticswidget', 'aw_teacher_level') && $html = $this->get_teacher_widget()) {
@@ -165,8 +196,13 @@ class widget implements renderable, templatable {
     }
 }
 
-
+/**
+ *  interface for widgets
+ */
 interface widgetfacade {
 
+    /**
+     * export_html method
+     */
     public function export_html();
 }
