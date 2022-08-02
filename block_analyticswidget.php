@@ -22,6 +22,9 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+ /**
+  *  Block analyticswidget class
+  */
 class block_analyticswidget extends block_base {
 
     /**

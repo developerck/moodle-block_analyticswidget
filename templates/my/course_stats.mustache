@@ -130,21 +130,9 @@ require([
     var chartDiv = $("#enrolment_course_stats");
 
     var chartdata = {
-        labels: {
-            {
-                {
-                    chart_enrolment.label
-                }
-            }
-        },
+        labels: {{{chart_enrolment.label}}},
         datasets: [{
-            data: {
-                {
-                    {
-                        chart_enrolment.dataset
-                    }
-                }
-            },
+            data:  {{{chart_enrolment.dataset}}},
             backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
             borderWidth: 2
         }]
@@ -213,21 +201,9 @@ require([
     var chartDiv = $("#completion_course_stats");
 
     var chartdata = {
-        labels: {
-            {
-                {
-                    chart_completion.label
-                }
-            }
-        },
+        labels:{{{chart_enrolment.label}}},
         datasets: [{
-            data: {
-                {
-                    {
-                        chart_completion.dataset
-                    }
-                }
-            },
+            data:  {{{chart_enrolment.dataset}}},
             backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
             borderWidth: 2,
             indexAxis: 'y',
