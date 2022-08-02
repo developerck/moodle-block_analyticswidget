@@ -128,11 +128,11 @@ require([
 ], function($, Chart) {
 
     var chartDiv = $("#enrolment_course_stats");
-
+    var chart = null;
     var chartdata = {
         labels: {{{chart_enrolment.label}}},
         datasets: [{
-            data:  {{{chart_enrolment.dataset}}},
+            data: {{{chart_enrolment.dataset}}},
             backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
             borderWidth: 2
         }]
@@ -157,12 +157,12 @@ require([
                                 var ds = data.datasets[0];
                                 var arc = meta.data[i];
                                 var custom = arc && arc.custom || {};
-                                var valueAtIndexOrDefault = Chart.helpers.valueAtIndexOrDefault;
+                                var vati = Chart.helpers.valueAtIndexOrDefault;
                                 var arcOpts = chart.options.elements.arc;
-                                var fill = custom.backgroundColor ? custom.backgroundColor : valueAtIndexOrDefault(ds.backgroundColor, i,
+                                var fill = custom.backgroundColor ? custom.backgroundColor : vati(ds.backgroundColor, i,
                                     arcOpts.backgroundColor);
-                                var stroke = custom.borderColor ? custom.borderColor : valueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
-                                var bw = custom.borderWidth ? custom.borderWidth : valueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
+                                var stroke = custom.borderColor ? custom.borderColor : vati(ds.borderColor, i, arcOpts.borderColor);
+                                var bw = custom.borderWidth ? custom.borderWidth : vati(ds.borderWidth, i, arcOpts.borderWidth);
                                 var value = chart.config.data.datasets[arc._datasetIndex].data[arc._index];
                                 return {
                                     text: label + " : " + value,
@@ -199,11 +199,11 @@ require([
 ], function($, Chart) {
 
     var chartDiv = $("#completion_course_stats");
-
+    var chart = null;
     var chartdata = {
-        labels:{{{chart_enrolment.label}}},
+        labels: {{{chart_enrolment.label}}},
         datasets: [{
-            data:  {{{chart_enrolment.dataset}}},
+            data: {{{chart_enrolment.dataset}}},
             backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
             borderWidth: 2,
             indexAxis: 'y',
