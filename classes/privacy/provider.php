@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,39 +12,35 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 
 /**
- * Code to be executed after the plugin's database scheme has been installed is defined here.
  *
  * @package     block_analyticswidget
  * @copyright   2022 Chandra K <developerck@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace block_analyticswidget\output;
 
+namespace block_analyticswidget\privacy;
 
-use plugin_renderer_base;
-use renderable;
 
 /**
- * analyticswidget block renderer
+ * Privacy Subsystem for block_analyticswidget implementing null_provider.
  *
- * @package    block_analyticswidget
  * @copyright  2022 Chandra K <developerck@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class renderer extends plugin_renderer_base {
-
+class provider implements \core_privacy\local\metadata\null_provider {
 
     /**
-     * Return the main content for the block overview.
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
      *
-     * @param main $main The main renderable
-     * @return string HTML string
+     * @return  string
      */
-    public function render_main( $widget) {
-        return $this->render_from_template('block_analyticswidget/widget', $widget->export_for_template($this));
+    public static function get_reason() : string {
+        return 'privacy:metadata';
     }
 }

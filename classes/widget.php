@@ -49,7 +49,8 @@ class widget implements renderable, templatable {
 
     private function get_teacher_courses() {
         global $DB;
-        $teacherrole = $DB->get_field("role", "id", array("shortname" => "editingteacher"));
+        $teacherrole = get_config('block_analyticswidget', 'teacher_roleid');
+
         if (!$teacherrole) {
             return null;
         }
@@ -78,9 +79,9 @@ class widget implements renderable, templatable {
         if (empty($teachercourse)) {
             return null;
         }
-        $courseids = implode(",", $teachercourse);
-        $sql = "select id,fullname, shortname from {course} where id in($courseids)";
-        $courses = $DB->get_records_sql($sql);
+        [$insql, $inparams] = $DB->get_in_or_equal($teachercourse);
+        $sql = "select id,fullname, shortname from {course} where id $insql";
+        $courses = $DB->get_records_sql($sql, $inparams);
 
         if (empty($courses)) {
             return null;
@@ -108,7 +109,7 @@ class widget implements renderable, templatable {
 
     private function studying_in($activecourses) {
         global $DB;
-        $studentrole = $DB->get_field("role", "id", array("shortname" => "student"));
+        $studentrole = get_config('block_analyticswidget', 'student_roleid');
         $studentcourses = [];
         foreach ($activecourses as $course) {
             $context = \context_course::instance($course->id);

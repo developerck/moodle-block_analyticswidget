@@ -64,7 +64,7 @@ class course_stats implements \block_analyticswidget\widgetfacade {
     private function enrolment() {
         return array(
             'data' => array(count($this->active_courses), (count($this->courses) - count($this->active_courses))),
-            'label' => array("Active", "In-Active")
+            'label' => array(get_string('active', 'block_analyticswidget'), get_string('inactive', 'block_analyticswidget'))
         );
     }
 
@@ -84,7 +84,8 @@ class course_stats implements \block_analyticswidget\widgetfacade {
 
         return array(
             'data' => array(count($this->active_courses), count($completed), count($progress)),
-            'label' => array("Active", "Completed", "In Progress")
+            'label' => array(get_string('active', 'block_analyticswidget'), get_string('completed', 'block_analyticswidget'),
+             get_string('inprogress', 'block_analyticswidget'))
         );
     }
 }
