@@ -25,7 +25,6 @@
 /**
  * analyticswidget block.
  *
- * @package    block_analyticswidget
  * @copyright  2022 Chandra K <developerck@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -68,6 +67,9 @@ class block_analyticswidget extends block_base {
         return $this->content;
     }
 
+    /**
+     * Single instance only
+     */
     public function instance_allow_multiple() {
         return false;
     }

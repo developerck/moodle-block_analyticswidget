@@ -41,7 +41,7 @@ class renderer extends plugin_renderer_base {
     /**
      * Return the main content for the block overview.
      *
-     * @param main $main The main renderable
+     * @param main $widget The main renderable
      * @return string HTML string
      */
     public function render_main( $widget) {

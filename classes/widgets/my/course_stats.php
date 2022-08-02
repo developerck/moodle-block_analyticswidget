@@ -25,14 +25,35 @@
 
 namespace block_analyticswidget\widgets\my;
 
-
+/**
+ *  course stats for me
+ */
 class course_stats implements \block_analyticswidget\widgetfacade {
 
+    /**
+     *  courses
+     */
     public $courses = [];
+    /**
+     * userid
+     */
     public $userid;
+    /**
+     * order
+     */
     public $order = 1;
+    /**
+     * active courses
+     */
     public $activecourses = [];
+    /**
+     * stuyding in
+     */
     public $studingin  = [];
+
+     /**
+      * Initializes class member variables.
+      */
     public function __construct($userid, $courses, $activecourses, $studingin) {
         $this->courses = $courses;
         $this->userid = $userid;
@@ -43,6 +64,12 @@ class course_stats implements \block_analyticswidget\widgetfacade {
             throw new \moodle_exception("missing user");
         }
     }
+
+    /**
+     * Returns the html contents.
+     *
+     * @return  string  block contents.
+     */
     public function export_html() {
         global $OUTPUT;
         $context  = array();
@@ -59,7 +86,11 @@ class course_stats implements \block_analyticswidget\widgetfacade {
         return $OUTPUT->render_from_template('block_analyticswidget/my/course_stats', $context);
     }
 
-
+    /**
+     * Returns the array.
+     *
+     * @return  array  data | label.
+     */
 
     private function enrolment() {
         return array(
@@ -68,6 +99,11 @@ class course_stats implements \block_analyticswidget\widgetfacade {
         );
     }
 
+    /**
+     * Returns the completed courses
+     *
+     * @return  array  data | label.
+     */
     private function completed() {
         global $CFG;
         require_once($CFG->libdir . "/completionlib.php");

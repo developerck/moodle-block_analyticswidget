@@ -16,6 +16,7 @@
 
 
 /**
+ * privacy file
  *
  * @package     block_analyticswidget
  * @copyright   2022 Chandra K <developerck@gmail.com>

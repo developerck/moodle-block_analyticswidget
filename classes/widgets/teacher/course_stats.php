@@ -25,15 +25,30 @@
 
 namespace block_analyticswidget\widgets\teacher;
 
-
+/**
+ *  Teacher Course stats
+ */
 class course_stats implements \block_analyticswidget\widgetfacade {
 
+    /**
+     * courses
+     */
     public $courses = [];
+    /**
+     * order of display
+     */
     public $order = 1;
+    /**
+     * Initailizaing
+     */
     public function __construct($courses) {
         $this->courses = $courses;
     }
 
+    /**
+     * export html
+     * @return string html content
+     */
     public function export_html() {
         global $OUTPUT;
         if (get_config('block_analyticswidget', 'aw_teacher_stats_course')) {
