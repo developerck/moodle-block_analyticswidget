@@ -2,8 +2,9 @@
 
 Analytics widget block with beautiful charts and stats for users
 
-developerck.com
+[developerck.com](developerck.com)
 
+![AnalyticsWidget](https://github.com/developerck/moodle-block_analyticswidget/actions/workflows/ci/badge.svg?branch=main)
 ## License ##
 
 2022 Chandra K <developerck@gmail.com>
