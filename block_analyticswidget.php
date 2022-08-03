@@ -102,7 +102,7 @@ class block_analyticswidget extends block_base {
      */
     public function applicable_formats() {
         return array(
-            'all' => true
+            'my' => true
         );
     }
 }

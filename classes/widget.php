@@ -121,6 +121,9 @@ class widget implements renderable, templatable {
         }
         $links = [];
         ksort($html);
+        if (!$html) {
+            return null;
+        }
         return array("html" => implode("", $html), "links" => $links);
     }
 
