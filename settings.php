@@ -50,5 +50,17 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configselect('block_analyticswidget/teacher_roleid',
         get_string('teacher_role', 'block_analyticswidget'), '', $teacher->id, $options));
 
+     $settings->add(new admin_setting_configcheckbox('block_analyticswidget/aw_teacher_stats_course',
+                                                    get_string('aw_teacher_stats_course', 'block_analyticswidget'),
+                                                    '',
+                                                    1));
+    $settings->add(new admin_setting_configcheckbox('block_analyticswidget/aw_teacher_stats_user',
+                                                    get_string('aw_teacher_stats_user', 'block_analyticswidget'),
+                                                    '',
+                                                    1));
+    $settings->add(new admin_setting_configcheckbox('block_analyticswidget/aw_teacher_stats_activity',
+                                                    get_string('aw_teacher_stats_activity', 'block_analyticswidget'),
+                                                    '',
+                                                    1));
 
 }
