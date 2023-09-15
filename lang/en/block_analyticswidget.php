@@ -41,7 +41,7 @@ $string['aw_teacher_stats_activity'] = 'Enable teacher activity stats';
 $string['aw_teacher_stats_course'] = 'Enable teacher course stats';
 
 $string['active'] = 'Active';
-$string['inactive'] = 'Inactive';
+$string['inactive'] = 'In-Active';
 $string['completed'] = 'Completed';
 $string['inprogress'] = 'In-Progress';
 
