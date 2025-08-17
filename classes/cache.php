@@ -15,17 +15,43 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin version and other meta-data are defined here.
+ * Code to be executed after the plugin's database scheme has been installed is defined here.
  *
  * @package     block_analyticswidget
+ * @category    upgrade
  * @copyright   2022 Chandra K <developerck@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_analyticswidget;
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_analyticswidget';
-$plugin->release = '1.0.0 [Mobile App Supported]';
-$plugin->version = 2022062108;
-$plugin->requires = 2019111809;
-$plugin->maturity = MATURITY_STABLE;
+/**
+ * Main cache class
+ *
+ */
+class cache{
+
+    public static function set_cache( $cachekey, $data){
+        $cc_cache = \cache::make('block_analyticswidget', 'awstat');
+        $val = new \stdClass();
+        $val->t = time();
+        $val->d =  $data;
+        $cc_cache->set($cachekey, serialize($val));
+        return true;
+    }
+
+    public static function get_cache($cachekey){
+        $cc_cache = \cache::make('block_analyticswidget', 'awstat');
+        $val = $cc_cache->get($cachekey);
+        $cache_valid = false;
+        if(!empty($val)){
+            $val = unserialize($val);
+            if( (time() - $val->t ) < 36000){
+                return $val->d;
+            }
+        }
+        return false;
+    }
+}

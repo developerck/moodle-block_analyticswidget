@@ -52,7 +52,7 @@ class activity_stats implements \block_analyticswidget\widgetfacade {
      * Export html
      * @return string Html content
      */
-    public function export_html() {
+    public function export_html($mobile_view= false) {
         global $OUTPUT;
         if (get_config('block_analyticswidget', 'aw_teacher_stats_activity')) {
             $context  = array();
@@ -66,6 +66,9 @@ class activity_stats implements \block_analyticswidget\widgetfacade {
                 $activities += count($cms);
             }
             $context['count'] = $activities;
+            if($mobile_view){
+                return $OUTPUT->render_from_template('block_analyticswidget/teacher/mobile/activity_stats', $context);    
+            }
             return $OUTPUT->render_from_template('block_analyticswidget/teacher/activity_stats', $context);
         }
         return false;

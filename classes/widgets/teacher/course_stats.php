@@ -52,7 +52,7 @@ class course_stats implements \block_analyticswidget\widgetfacade {
      * export html
      * @return string html content
      */
-    public function export_html() {
+    public function export_html($mobile_view= false) {
         global $OUTPUT;
         if (get_config('block_analyticswidget', 'aw_teacher_stats_course')) {
             $context  = array();
@@ -60,6 +60,9 @@ class course_stats implements \block_analyticswidget\widgetfacade {
 
             $context['data'] = $this->courses;
             $context['count'] = count($this->courses);
+            if($mobile_view){
+                return $OUTPUT->render_from_template('block_analyticswidget/teacher/mobile/course_stats', $context);
+            }
             return $OUTPUT->render_from_template('block_analyticswidget/teacher/course_stats', $context);
         }
         return false;

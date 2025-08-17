@@ -49,12 +49,12 @@ class course_stats implements \block_analyticswidget\widgetfacade {
      * active courses
      * @var array $activecourses
      */
-    public $activecourses = [];
+    public $active_courses = [];
     /**
      * stuyding in
      * @var array $studingin
      */
-    public $studingin  = [];
+    public $studing_in  = [];
 
      /**
       * Initializes class member variables.
@@ -79,10 +79,11 @@ class course_stats implements \block_analyticswidget\widgetfacade {
      *
      * @return  string  block contents.
      */
-    public function export_html() {
-        global $OUTPUT;
+    public function export_html($mobile_view= false) {
+        global $OUTPUT, $CFG;
         $context  = array();
         $context['enrolment'] = $this->enrolment();
+        $context['link'] = '';
         if (!empty($this->courses)) {
             $context['chart_enrolment']['label'] = json_encode($context['enrolment']['label']);
             $context['chart_enrolment']['dataset'] = json_encode($context['enrolment']['data']);
@@ -90,8 +91,14 @@ class course_stats implements \block_analyticswidget\widgetfacade {
             $context['chart_completion']['label'] = json_encode($context['completion']['label']);
             $context['chart_completion']['dataset'] = json_encode($context['completion']['data']);
         }
+        if(file_exists($CFG->dirroot."/my/courses.php")){
+            $context['link'] = 1;
+        }
 
         $context['enrolasstudent'] = count($this->studing_in);
+        if($mobile_view){
+            return $OUTPUT->render_from_template('block_analyticswidget/my/mobile/course_stats', $context);
+        }
         return $OUTPUT->render_from_template('block_analyticswidget/my/course_stats', $context);
     }
 

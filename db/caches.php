@@ -15,17 +15,23 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin version and other meta-data are defined here.
+ * Code to be executed after the plugin's database scheme has been installed is defined here.
  *
  * @package     block_analyticswidget
+ * @category    upgrade
  * @copyright   2022 Chandra K <developerck@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_analyticswidget';
-$plugin->release = '1.0.0 [Mobile App Supported]';
-$plugin->version = 2022062108;
-$plugin->requires = 2019111809;
-$plugin->maturity = MATURITY_STABLE;
+// Added definition for keyset cache.
+$definitions = [
+    'awstat' => [
+        'mode' => cache_store::MODE_APPLICATION,
+        'simplekeys' => true,
+        'ttl' => 3600,
+    ]
+];

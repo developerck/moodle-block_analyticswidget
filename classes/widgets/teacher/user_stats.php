@@ -52,7 +52,7 @@ class user_stats implements \block_analyticswidget\widgetfacade {
      * Export html
      * @return string html content
      */
-    public function export_html() {
+    public function export_html($mobile_view= false) {
         global $OUTPUT;
         if (get_config('block_analyticswidget', 'aw_teacher_stats_user')) {
             $context  = array();
@@ -66,6 +66,9 @@ class user_stats implements \block_analyticswidget\widgetfacade {
                 $enrolledusers += $u;
             }
             $context['count'] = $enrolledusers;
+            if($mobile_view){
+                return $OUTPUT->render_from_template('block_analyticswidget/teacher/mobile/user_stats', $context);
+            }
             return $OUTPUT->render_from_template('block_analyticswidget/teacher/user_stats', $context);
         }
         return false;

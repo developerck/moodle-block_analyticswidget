@@ -56,10 +56,17 @@
 
 
 </div>
-<div class="aw_stats col-md-8  mb-4">
+<div class="aw_stats col-md-12 mb-4">
     <div class="aw_widget_header">
-        <h5> <a href="{{config.wwwroot}}/my/courses.php" title="{{#str}}mycourses{{/str}}"
-                data-toggle="tooltip">{{#str}}my_so_far, block_analyticswidget{{/str}}</a></h5>
+        
+        <h5>{{#link}} <a href="{{config.wwwroot}}/my/courses.php" title="{{#str}}mycourses{{/str}}"
+                data-toggle="tooltip"><i class="fa fa-graduation-cap"></i> {{#str}}my_so_far, block_analyticswidget{{/str}}</a>
+            {{/link}}
+            {{^link}}
+            <i class="fa fa-graduation-cap"></i> {{#str}}my_so_far, block_analyticswidget{{/str}}
+            {{/link}}
+            </h5>
+
         <div class="tools">
             {{{links}}}
         </div>
@@ -98,27 +105,6 @@
 
     </div>
 </div>
-{{#enrolasstudent}}
-<div class="col-md-4 ">
-    <div class="aw_widget_header">
-        <h5> {{#str}}my_current, block_analyticswidget{{/str}}</h5>
-    </div>
-    <div class="aw-widget aw-shadow-box ">
-        <div>
-            <div class="aw-widget-subtitle">As student</div>
-
-            <div class="aw-widget-title">{{enrolasstudent}}</div>
-        </div>
-        <div class="aw-widget-icon bg-green">
-            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-        </div>
-
-    </div>
-
-</div>
-
-{{/enrolasstudent}}
-
 
 {{#chart_enrolment}}
 {{#js}}
@@ -201,9 +187,9 @@ require([
     var chartDiv = $("#completion_course_stats");
     var chart = null;
     var chartdata = {
-        labels: {{{chart_enrolment.label}}},
+        labels: {{{chart_completion.label}}},
         datasets: [{
-            data: {{{chart_enrolment.dataset}}},
+            data: {{{chart_completion.dataset}}},
             backgroundColor: ["#fe6384", "#36a2eb", "#fdce56"],
             borderWidth: 2,
             indexAxis: 'y',

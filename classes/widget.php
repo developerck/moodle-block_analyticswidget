@@ -36,7 +36,8 @@ defined('MOODLE_INTERNAL') || die();
  * Main Widget class
  *
  */
-class widget implements renderable, templatable {
+class widget implements renderable, templatable
+{
 
     /**
      * user id
@@ -45,15 +46,22 @@ class widget implements renderable, templatable {
     private $_userid;
 
     /**
+     * user id
+     * @var int $_userid
+     */
+    protected $mobile_view;
+
+    /**
      * Intializing
      * @param int $userid | optional
      */
-    public function __construct($userid = 0) {
+    public function __construct($userid = 0, $mobile_view = false)
+    {
         global $USER;
         if (!$userid) {
             $userid = $USER->id;
         }
-
+        $this->mobile_view = $mobile_view;
         $this->_userid = $userid;
     }
 
@@ -61,7 +69,8 @@ class widget implements renderable, templatable {
      * Teacher Courses
      * @return array $teachercourse
      */
-    private function get_teacher_courses() {
+    private function get_teacher_courses()
+    {
         global $DB;
         $teacherrole = get_config('block_analyticswidget', 'teacher_roleid');
 
@@ -88,10 +97,12 @@ class widget implements renderable, templatable {
      * Teacher Widget
      * @return array  html
      */
-    private function get_teacher_widget() {
+    private function get_teacher_widget()
+    {
 
-        global $DB;
+        global $DB, $USER;
         $html = [];
+
         // Check if teacher at some course.
         $teachercourse = $this->get_teacher_courses();
         if (empty($teachercourse)) {
@@ -110,7 +121,7 @@ class widget implements renderable, templatable {
             if (in_array('block_analyticswidget\widgetfacade', class_implements($class))) {
 
                 $obj = new $class($courses);
-                if ($ht = $obj->export_html()) {
+                if ($ht = $obj->export_html($this->mobile_view)) {
                     if (!array_key_exists($obj->order, $html)) {
                         $html[$obj->order] = $ht;
                     } else {
@@ -132,7 +143,8 @@ class widget implements renderable, templatable {
      * @param array $activecourses
      * @return array $studentcourses
      */
-    private function studying_in($activecourses) {
+    private function studying_in($activecourses)
+    {
         global $DB;
         $studentrole = get_config('block_analyticswidget', 'student_roleid');
         $studentcourses = [];
@@ -152,19 +164,23 @@ class widget implements renderable, templatable {
      * my widget
      * @return array  array of html and links
      */
-    private function get_my_widget() {
-
+    private function get_my_widget()
+    {
+        global $USER;
         $html = [];
+        $data = new \stdClass();
         $courses = enrol_get_users_courses($this->_userid);
         $activecourses = enrol_get_users_courses($this->_userid, true);
-        $studingin  = $this->studying_in($activecourses);
+        $studingin_all  = $this->studying_in($courses);
+        $studingin_active  = $this->studying_in($activecourses);
+
         foreach (glob(__DIR__ . '/widgets/my/*.php') as $file) {
             require_once($file);
             $class = '\\block_analyticswidget\widgets\\my\\' . basename($file, '.php');
             if (in_array('block_analyticswidget\widgetfacade', class_implements($class))) {
 
-                $obj = new $class($this->_userid, $courses, $activecourses, $studingin);
-                if ($ht = $obj->export_html()) {
+                $obj = new $class($this->_userid, $studingin_all, $studingin_active, $studingin_active);
+                if ($ht = $obj->export_html($this->mobile_view)) {
                     if (!array_key_exists($obj->order, $html)) {
                         $html[$obj->order] = $ht;
                     } else {
@@ -177,9 +193,14 @@ class widget implements renderable, templatable {
         ksort($html);
         $links = [];
 
-        $links[] = \html_writer::link(new \moodle_url('/user/profile.php',
-        array("id" => $this->_userid)), '<i class="fa fa-user"></i>',
-        array("title" => get_string('profile'), "data-toggle" => "tooltip"));
+        $links[] = \html_writer::link(
+            new \moodle_url(
+                '/user/profile.php',
+                array("id" => $this->_userid)
+            ),
+            '<i class="fa fa-user"></i>',
+            array("title" => get_string('profile'), "data-toggle" => "tooltip")
+        );
 
         $links = implode(" ", $links);
         return array("html" => implode("", $html), "userid" => $this->_userid, "links" => $links);
@@ -190,7 +211,8 @@ class widget implements renderable, templatable {
      * @param main $renderer
      * @return array $return
      */
-    public function export_for_template($renderer) {
+    public function export_for_template($renderer)
+    {
         $return = [];
         if (get_config('block_analyticswidget', 'aw_teacher_level') && $html = $this->get_teacher_widget()) {
             $return["teacher"] = $html;
@@ -203,10 +225,11 @@ class widget implements renderable, templatable {
 /**
  *  interface for widgets
  */
-interface widgetfacade {
+interface widgetfacade
+{
 
     /**
      * export_html method
      */
-    public function export_html();
+    public function export_html($mobile_view = false);
 }

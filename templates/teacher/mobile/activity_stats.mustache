@@ -1,0 +1,44 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_analyticswidget/activity_stats
+
+    Example context (json):
+    {
+    "data": {
+        "2": {
+        "id": "2",
+        "fullname": "test",
+        "shortname": "test"
+        }
+    },
+    "count": 1
+    }
+}}
+
+<ion-col size="4"  class="aw_stats">
+   
+    <ion-card color="primary">
+      <ion-card-header>
+        <ion-card-subtitle
+          >{{#str}} teacher_activity_stats,block_analyticswidget{{/str}}  
+          </ion-card-subtitle
+        >
+      </ion-card-header>
+      <ion-card-content>
+          <div class="maw_card_content">{{ count }}</div>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+

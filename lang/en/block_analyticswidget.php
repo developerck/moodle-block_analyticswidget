@@ -27,38 +27,31 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Analytic Widgets';
 
-
-
-$string['aw_teacher_stat'] = 'For teacher widgets';
-$string['teacher_level'] = "Teaching at";
+$string['teacher_level'] = "Teaching";
 $string['aw_teacher_level'] = "Enable teacher level";
-$string['aw_teacher_stats'] = 'For teacher widgets';
+$string['aw_teacher_stats'] = '';
 $string['teacher_course_stats'] = "In courses";
 $string['teacher_user_stats'] = "To users";
-$string['teacher_activity_stats'] = "Created activity";
+$string['teacher_activity_stats'] = "In activities";
 $string['aw_teacher_stats_user'] = 'Enable teacher user stats';
 $string['aw_teacher_stats_activity'] = 'Enable teacher activity stats';
 $string['aw_teacher_stats_course'] = 'Enable teacher course stats';
-
 $string['active'] = 'Active';
 $string['inactive'] = 'In-Active';
 $string['completed'] = 'Completed';
 $string['inprogress'] = 'In-Progress';
-
 $string['my_level'] = "My";
-$string['my_badge_stats'] = 'Badges ';
-$string['my_certificate_stats'] = 'Certificate';
-$string['my_credit_stats'] = 'Credit';
 $string['my_course_stats'] = '';
 $string['aw_my_stats'] = 'For my widgets';
-$string['aw_my_stats_credit'] = 'Enable credit stats';
-$string['aw_my_stats_certificate'] = 'Enable certificate stats';
-$string['aw_my_stats_badge'] = 'Enable badge stats';
-$string['my_so_far'] = 'Courses, so far';
-$string['my_current'] = 'Currently enrolled';
-$string['last_earnedt_at'] = 'Last earned at,';
+$string['my_so_far'] = 'courses, so far as student';
+$string['my_current'] = 'Courses';
 $string['my_no_course'] = 'Start your journey with a course, <a href="/course/">Browse all courses<a/>';
-
 $string['privacy:metadata'] = 'The Analyticswidget block only shows data stored in other locations.';
 $string['teacher_role'] = 'Teacher role';
 $string['student_role'] = 'Student role';
+$string['as_student'] = 'As Student';
+$string['studying_in'] = 'Studying';
+$string['mobile_view'] = 'Display block on Moodle Mobile app';
+$string['cachedef_awstat'] = 'Cache for Block Analytics Widget';
+$string['aw_promo'] = '<p>Plugin will be updating frequently to support more insights and blocks. Keep checking the latest version.</p>';
+$string['site_level']   = 'Site Level';

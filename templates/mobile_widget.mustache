@@ -25,39 +25,36 @@
     }
 }}
 
-<div class="ananyticswidget">
+<div
+  class="analyticswidget"
+  data-region="analyticswidget-view-content"
+  id="analyticswidget-view-{{ uniqid }}"
+>
 
+  {{#teacher}}
+  <div class="aw_teacher">
+    <ion-item class="aw_header">
+        <h6>{{#str}}teacher_level, block_analyticswidget{{/str}}</h6>
+      </ion-item>
+    <ion-grid class="ion-no-padding">
+    <ion-row>{{{teacher.html}}} </ion-row>
+    </ion-grid>
+  </div>
+  {{/teacher}}
 
-    {{#teacher}}
-        <div class="aw_teacher">
-            <div class="aw_header">
-        <h4> {{#str}}teacher_level, block_analyticswidget{{/str}} </h4>
-        {{#teacher.links}}
-        <div class="tools">
-            {{{teacher.links}}}
-        </div>
-                {{/teacher.links}}
-            </div>
-        <div class=" row  mt-4">
-            {{{teacher.html}}}
-        </div>
-    </div>
-    {{/teacher}}
-
-
-    {{#my}}
-            <div class="aw_teacher">
-                <div class="aw_header">
-        <h4> {{#str}}my_level, block_analyticswidget{{/str}} </h4>
-        {{#my.links}}
-        <div class="tools">
-            {{{my.links}}}
-        </div>
-                    {{/my.links}}
-                </div>
-        <div class=" row  mt-4">
-            {{{my.html}}}
-        </div>
-    </div>
-    {{/my}}
+  {{#my}}
+  <div class="aw_my">
+   
+    <ion-grid class="ion-no-padding">
+    <ion-row>{{{my.html}}} </ion-row>
+    </ion-grid>
+  </div>
+  {{/my}}
 </div>
+<style>
+.aw_stats .maw_card_content{
+text-align: center;
+font-size: 20px;
+}
+
+</style>

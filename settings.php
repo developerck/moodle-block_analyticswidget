@@ -27,7 +27,15 @@ defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
 
+    $setting = new admin_setting_configcheckbox(
+        'block_analyticswidget/mobile_view',
+        get_string('mobile_view', 'block_analyticswidget'),
+        '',
+        1
+    );
+    $settings->add($setting);
     $settings->add(new admin_setting_heading('aw_teacher', '', get_string('aw_teacher_stats', 'block_analyticswidget')));
+
     // Teacher.
     $settings->add(new admin_setting_configcheckbox(
         'block_analyticswidget/aw_teacher_level',
@@ -37,30 +45,50 @@ if ($ADMIN->fulltree) {
     ));
 
 
+  
     $options = get_default_enrol_roles(context_system::instance());
-    $student = get_archetype_roles('student');
-    $student = reset($student);
-    $settings->add(new admin_setting_configselect('block_analyticswidget/student_roleid',
-        get_string('student_role', 'block_analyticswidget'), '', $student->id, $options));
-
-
-
     $teacher = get_archetype_roles('editingteacher');
     $teacher = reset($teacher);
-    $settings->add(new admin_setting_configselect('block_analyticswidget/teacher_roleid',
-        get_string('teacher_role', 'block_analyticswidget'), '', $teacher->id, $options));
+    $settings->add(new admin_setting_configselect(
+        'block_analyticswidget/teacher_roleid',
+        get_string('teacher_role', 'block_analyticswidget'),
+        '',
+        $teacher->id,
+        $options
+    ));
 
-     $settings->add(new admin_setting_configcheckbox('block_analyticswidget/aw_teacher_stats_course',
-                                                    get_string('aw_teacher_stats_course', 'block_analyticswidget'),
-                                                    '',
-                                                    1));
-    $settings->add(new admin_setting_configcheckbox('block_analyticswidget/aw_teacher_stats_user',
-                                                    get_string('aw_teacher_stats_user', 'block_analyticswidget'),
-                                                    '',
-                                                    1));
-    $settings->add(new admin_setting_configcheckbox('block_analyticswidget/aw_teacher_stats_activity',
-                                                    get_string('aw_teacher_stats_activity', 'block_analyticswidget'),
-                                                    '',
-                                                    1));
+    $settings->add(new admin_setting_configcheckbox(
+        'block_analyticswidget/aw_teacher_stats_course',
+        get_string('aw_teacher_stats_course', 'block_analyticswidget'),
+        '',
+        1
+    ));
+    $settings->add(new admin_setting_configcheckbox(
+        'block_analyticswidget/aw_teacher_stats_user',
+        get_string('aw_teacher_stats_user', 'block_analyticswidget'),
+        '',
+        1
+    ));
+    $settings->add(new admin_setting_configcheckbox(
+        'block_analyticswidget/aw_teacher_stats_activity',
+        get_string('aw_teacher_stats_activity', 'block_analyticswidget'),
+        '',
+        1
+    ));
+
+   
+    $student = get_archetype_roles('student');
+    $student = reset($student);
+    $settings->add(new admin_setting_configselect(
+        'block_analyticswidget/student_roleid',
+        get_string('student_role', 'block_analyticswidget'),
+        '',
+        $student->id,
+        $options
+    ));
+
+
+    $settings->add(new admin_setting_description('aw_promo', '', get_string('aw_promo', 'block_analyticswidget')));
+
 
 }
